@@ -59,8 +59,6 @@ def command(
             if include:
                 game_lines.append(file)
 
-    print(f"{game_lines=}")
-
     if dry_run:
         print_results(
             input_path=input_path,
