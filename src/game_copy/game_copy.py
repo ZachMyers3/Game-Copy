@@ -38,11 +38,7 @@ def find_file_in_folder(in_folder: Path) -> Path:
         return None
 
 
-def game_copy(
-    input_path: Path,
-    output_path: Path,
-    game_list: list[str],
-):
+def game_copy(input_path: Path, output_path: Path, game_list: list[str]):
     input_path = input_path.absolute()
     output_path = output_path.absolute()
     full_path_game_list: list[Path] = []
