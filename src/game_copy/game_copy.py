@@ -38,7 +38,12 @@ def find_file_in_folder(in_folder: Path) -> Path:
         return None
 
 
-def game_copy(input_path: Path, output_path: Path, game_list: list[str]):
+def game_copy(
+    input_path: Path,
+    output_path: Path,
+    game_list: list[str],
+    no_unzip: bool = False,
+):
     input_path = input_path.absolute()
     output_path = output_path.absolute()
     full_path_game_list: list[Path] = []
@@ -56,7 +61,7 @@ def game_copy(input_path: Path, output_path: Path, game_list: list[str]):
         else:
             game_name = None
 
-        if game.suffix == ".zip":
+        if game.suffix == ".zip" and not no_unzip:
             print(f"Unzipped {game} to {output_path}")
             extract_zip_to_dir(zip_file=game, out_location=output_path)
         else:

@@ -27,6 +27,9 @@ def command(
         [],
         help="A string a file may contain to skip being copied, e.g. BETA, DEMO, etc.",
     ),
+    no_unzip: bool = typer.Option(
+        False, help="Disable auto-unzipping for things like arcade games"
+    ),
     dry_run: bool = typer.Option(
         False, help="If enabled just list all files to copy and exit"
     ),
@@ -70,6 +73,7 @@ def command(
             input_path=input_path,
             output_path=output_path,
             game_list=game_lines,
+            no_unzip=no_unzip,
         )
 
 
