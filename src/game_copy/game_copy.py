@@ -56,7 +56,6 @@ def game_copy(
 
         if not game.is_file():
             game_name = game.name
-            print(f"{game_name=}")
             game = find_file_in_folder(in_folder=game)
         else:
             game_name = None
