@@ -1,0 +1,55 @@
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.poetry]
+name = "Game Copy"
+description="Copy games from one directory to another for managing ROMs, mostly"
+version = "0.1.0"
+authors = ["Zachary Myers <zachmyers3@gmail.com>"]
+readme = "README.md"
+license =  "MIT"
+classifiers=[
+    'Development Status :: 2 - Pre-Alpha',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Natural Language :: English',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+]
+packages = [
+    { include = "game_copy", from = "src" },
+    { include = "tests", format = "sdist" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+typer = ">=0.3.2"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=6.2.4"
+bump2version = ">=1.0.1"
+pyinstaller = ">=4.5.1"
+ruff = ">=0.0.261"
+pre-commit = ">=3.2.2"
+
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[[tool.poetry.source]]
+name = "wbc"
+url = "http://pypi.dokku2.woosterbrush.com/"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "default"
