@@ -14,8 +14,19 @@ def extract_zip_to_dir(zip_file: Path, out_location: Path) -> None:
         zip_ref.extractall(out_location)
 
 
-def copy_to_dir(input_path: Path, output_path: Path) -> None:
+def copy_to_dir(
+    input_path: Path, output_path: Path, rename_name: str | None
+) -> None:
     copy(input_path, output_path)
+    if rename_name is not None:
+        current_file_name = input_path.name
+        current_file_suffix = input_path.suffix
+        output_file_name = output_path / current_file_name
+        renamed_file_name = output_path / f"{rename_name}{current_file_suffix}"
+        print(
+            f"Subfolder was found, renaming {output_file_name} to {renamed_file_name} to remove subfolder"
+        )
+        output_file_name.rename(renamed_file_name)
 
 
 def find_file_in_folder(in_folder: Path) -> Path:
@@ -44,14 +55,20 @@ def game_copy(
             continue
 
         if not game.is_file():
+            game_name = game.name
+            print(f"{game_name=}")
             game = find_file_in_folder(in_folder=game)
+        else:
+            game_name = None
 
         if game.suffix == ".zip":
             print(f"Unzipped {game} to {output_path}")
             extract_zip_to_dir(zip_file=game, out_location=output_path)
         else:
             print(f"Copying {game} to {output_path}")
-            copy_to_dir(input_path=game, output_path=output_path)
+            copy_to_dir(
+                input_path=game, output_path=output_path, rename_name=game_name
+            )
 
 
 if __name__ == "__main__":
