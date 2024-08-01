@@ -2,6 +2,8 @@ from pathlib import Path
 from shutil import copy
 import zipfile
 
+ROM_SUFFIX_LIST: list[str] = [".wbfs", ".iso"]
+
 
 def extract_zip_to_dir(zip_file: Path, out_location: Path) -> None:
     """_summary_
@@ -35,7 +37,9 @@ def find_file_in_folder(in_folder: Path) -> Path:
     if len(files) == 1:
         return files[0]
     else:
-        return None
+        for file in files:
+            if file.suffix in ROM_SUFFIX_LIST:
+                return file
 
 
 def game_copy(
